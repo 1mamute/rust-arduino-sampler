@@ -3,7 +3,7 @@ use std::io::{stdin, stdout, Write};
 
 use midir::{Ignore, MidiInput};
 
-pub fn _read() -> Result<(), Box<dyn Error>> {
+pub fn read() -> Result<(), Box<dyn Error>> {
     let mut input = String::new();
 
     let mut midi_in = MidiInput::new("midir reading input")?;

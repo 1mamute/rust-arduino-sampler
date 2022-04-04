@@ -6,6 +6,7 @@ use cpal::{
 };
 
 mod audio;
+mod midi;
 
 fn main() {
     let result: Result<(Device, Stream), Box<dyn Error>> = match audio::read() {
@@ -34,6 +35,11 @@ fn main() {
         "Connection open, reading input from '{}' (press enter to exit) ...",
         device.name().unwrap()
     );
+
+    match midi::read() {
+        Ok(_) => (),
+        Err(err) => println!("Error: {}", err),
+    }
 
     let mut input = String::new();
     input.clear();
