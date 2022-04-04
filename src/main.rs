@@ -6,6 +6,7 @@ use cpal::{
 };
 
 mod audio;
+
 fn main() {
     let result: Result<(Device, Stream), Box<dyn Error>> = match audio::read() {
         Ok((out_device, config)) => {
