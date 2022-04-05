@@ -1,3 +1,4 @@
+#[derive(Debug, PartialEq, Eq, Hash)]
 pub enum ArturiaMinilabMkiiKeys {
     Key1,
     Key2,
