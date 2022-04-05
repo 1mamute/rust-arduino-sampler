@@ -2,6 +2,21 @@ use std::error::Error;
 use std::io::{stdin, stdout, Write};
 
 use midir::{Ignore, MidiInput};
+pub struct MidiMessage {
+    _message: u8,
+    _note: u8,
+    _velocity: u8,
+}
+
+impl From<&[u8]> for MidiMessage {
+    fn from(item: &[u8]) -> Self {
+        MidiMessage {
+            _message: item[0],
+            _note: item[1],
+            _velocity: item[2],
+        }
+    }
+}
 
 pub fn read() -> Result<(), Box<dyn Error>> {
     let mut input = String::new();
@@ -44,6 +59,7 @@ pub fn read() -> Result<(), Box<dyn Error>> {
         "midir-read-input",
         move |stamp, message, _| {
             println!("{}: {:?} (len = {})", stamp, message, message.len());
+            let midi_message: MidiMessage = message.into();
         },
         (),
     )?;
