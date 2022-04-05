@@ -2,7 +2,8 @@ use std::error::Error;
 use std::io::{stdin, stdout, Write};
 
 use midir::{Ignore, MidiInput};
-#[cfg(debug_assertions)]
+
+use crate::keymaps::arturia_minilab_mkii::ArturiaMinilabMkiiKeys;
 #[derive(Debug)]
 pub struct MidiMessage {
     _message: u8,
@@ -72,7 +73,8 @@ pub fn read() -> Result<(), Box<dyn Error>> {
                     _velocity,
                 } => {
                     #[cfg(debug_assertions)]
-                    println!("Midi message is indeed mapped! {:?}", midi_message)
+                    println!("Midi message is indeed mapped! {:?}", midi_message);
+                    println!("{}", ArturiaMinilabMkiiKeys::Key1.as_str());
                 }
                 _ => {
                     #[cfg(debug_assertions)]
