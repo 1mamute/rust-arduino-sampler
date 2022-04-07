@@ -1,0 +1,16 @@
+apiVersion: controllers.rae.io/v1
+kind: Keymap
+metadata:
+  name: Minilab
+  version: MK II
+  vendor: Arturia
+spec:
+  keymap:
+    - name: FirstWhite
+      index: 1
+      note: 144
+      velocity: 0
+    - name: SecondWhite
+      index: 2
+      note: 146
+      velocity: 0
