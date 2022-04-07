@@ -6,6 +6,7 @@ use cpal::{
 };
 
 mod audio;
+mod controllers;
 mod midi;
 
 fn main() {

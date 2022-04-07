@@ -2,6 +2,8 @@ use std::error::Error;
 use std::io::{stdin, stdout, Write};
 
 use midir::{Ignore, MidiInput};
+
+#[derive(Debug)]
 pub struct MidiMessage {
     _message: u8,
     _note: u8,
@@ -58,8 +60,25 @@ pub fn read() -> Result<(), Box<dyn Error>> {
         in_port,
         "midir-read-input",
         move |stamp, message, _| {
+            #[cfg(debug_assertions)]
             println!("{}: {:?} (len = {})", stamp, message, message.len());
+
             let midi_message: MidiMessage = message.into();
+
+            match midi_message {
+                MidiMessage {
+                    _message: 144,
+                    _note: 48,
+                    _velocity,
+                } => {
+                    #[cfg(debug_assertions)]
+                    println!("Midi message is indeed mapped! {:?}", midi_message);
+                }
+                _ => {
+                    #[cfg(debug_assertions)]
+                    println!("Midi message not mapped: {:?}", midi_message)
+                }
+            }
         },
         (),
     )?;
